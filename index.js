@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+require('dotenv/config');
+const mongoose = require('mongoose');
 const app = express();
 
 // set the port of our application
@@ -7,6 +9,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(morgan('dev'));
+
+mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, });
 
 app.use((req, res, next) => {
     const error = new Error("Whoops! Unknown Error");
